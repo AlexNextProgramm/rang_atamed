@@ -1,0 +1,63 @@
+:root{
+    --color-border-logs:#a9a9a9;
+}
+.logs{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-right: 10px;
+    
+    .butt-block{
+        margin-top: 20px;
+        button{
+            margin-top: 5px;
+            padding: 5px 20px;
+            background: #d8602a;
+            color: white;
+            font-weight: 600;
+            border: none;
+            border-radius: 5px 5px 0px 0px ;
+            border-left: 1px solid var(--color-border-logs);
+            border-top: 1px solid var(--color-border-logs);
+            border-right: 1px solid var(--color-border-logs);
+            cursor: pointer;
+            margin-right: 1px;
+        }
+        .btn-focus{
+            margin-top: 0px;
+            padding: 0px 20px 5px 20px;
+        }
+    }
+    .content-error{
+        display: flex;
+        flex-direction: column;
+        padding-top: 10px ;
+        width: 100%;
+        min-height: 80vh;
+        border: 1px solid var(--color-border-logs);
+        border-radius: 0px 5px 5px 5px;
+        overflow: auto;
+        p{
+            font-size: 14px;
+            padding: 5px;
+            width: 100%;
+        }
+    }
+
+    .clear-logs{
+        width: max-content;
+        padding: 10px 25px;
+        border: none;
+        border: none;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        background: rgb(239, 239, 239);
+        font-weight: 500;
+        font-style: italic;
+        cursor: pointer;
+        &:hover{
+            background: rgb(189, 189, 189);
+        }
+    }
+    
+}

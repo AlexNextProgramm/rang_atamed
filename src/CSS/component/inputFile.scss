@@ -1,0 +1,27 @@
+
+    .file{
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0px;
+        b{
+            position: relative;
+            cursor: pointer;
+            font-weight: 400;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            background: #d2d2d2;
+        }
+        
+        b::before{
+            position: absolute;
+            content: ' ';
+            width: 20px;
+            height: 20px;
+            right: 10px;
+            background: no-repeat center url('./../../images/icon-file.png');
+        }
+        input{
+            display: none;
+        }
+    }

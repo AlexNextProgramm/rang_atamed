@@ -1,0 +1,26 @@
+.client-content-body{
+        display: flex;
+        flex-direction: column;
+        .block-column{
+            display: flex;
+            flex-direction: column;
+        }
+        .block-report{
+            // margin-top: 5px;
+            margin-bottom: 20px;
+            margin-right: 20px;
+            padding: 10px ;
+            border: 1px solid rgb(203, 203, 203);
+            display: flex;
+            flex-direction: column;
+           .header-report{
+            font-weight: 500;
+           }
+           p{
+            margin-top: 5px;
+            margin-bottom: 5px;
+           }
+
+        }
+         
+    }

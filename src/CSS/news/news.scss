@@ -1,0 +1,59 @@
+@use './../mixin.scss' as m;
+
+.block-news{
+    @include m.flex(column);
+    padding: 0px 10px;
+    max-width: 800px;
+    form-m{
+        width: 100%;
+
+         @include m.flex(column);
+        justify-content: center;
+        align-items: center;
+
+    }
+      input, textarea, .file{
+            margin: 10px 0px;
+            border-radius: 10px;
+            outline: none;
+            background: #d2d2d2;
+            border:none;
+            outline: none;
+            padding: 10px 10px;
+            font-size: 16px;
+            width: 100%;
+        }
+        textarea{
+            min-height: 250px;
+        }
+        button{
+            @include m.btn-yellow;
+            bottom: auto;
+            left: auto;
+            max-width: 200px;
+        }
+}
+.news{
+    @include m.flex(column);
+    
+        padding: 20px;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px #e0dede;
+        margin: 20px 0px;
+        h2{
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #2b8fe6;
+         
+        }
+
+
+
+        p{
+            font-style: italic;
+            font-weight: 400;
+        }
+      
+        
+}

@@ -1,0 +1,60 @@
+@mixin search-tab{
+        display: flex;
+        flex-wrap: wrap;
+
+        button{
+            cursor: pointer;
+            background: none;
+            padding: 5px 15px;
+            border: 1px solid rgb(126, 126, 126);
+            margin-right: 5px;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+     .active {
+         background: #e5e5e5;
+       }
+ }
+
+ @mixin btn-yellow{
+    position: relative;
+    bottom: 40px;
+    left: 20px;
+    padding: 10px 25px;
+    font-size: 14px;
+    background: var(--btn-yellow);
+    border: none;
+    color: black !important;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 5px;
+    &:disabled{
+        background: var(--text-color-opacity) !important;
+    }
+ }
+
+
+// content - center
+// $colrow - column || row
+ @mixin flex($colrow){
+    display: flex;
+    flex-direction: $colrow;
+    position: relative;
+    width: 100%;
+}
+
+
+@mixin fxcenter(){
+     justify-content: center;
+     align-items: center;
+}
+
+@mixin tab($color){
+    background: $color;
+    padding: 3px 5px;
+    border-radius: 5px;
+    margin: 0px 10px;
+    outline: none;
+    border: none;
+}

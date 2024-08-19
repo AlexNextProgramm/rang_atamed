@@ -1,0 +1,184 @@
+@use './mixin.scss' as m;
+
+.analitics{
+    @include m.flex(column);
+    padding-right: 50px;
+    margin-bottom: 100px;
+    h1{
+        margin-bottom: 20px;
+        margin-left: 5px;
+    }
+    h4{
+        margin-top: 30px !important;
+        margin-left: 5px !important;
+        font-size: 26px !important;
+    }
+
+    .block-analitics{
+       @include m.flex(column);
+        padding: 20px;
+        padding-left: 40px;
+        border-radius: 10px;
+        border: 1px solid #bbbbbb;
+        margin-top: 15px;
+        margin-left: 5px;
+
+        .header-filial-analitics{
+            display: flex;
+            flex-direction: row;
+            h3{
+                width: 650px;
+                border-bottom: 1px solid #bbbbbb;
+                padding: 10px 0px;
+            }
+            b{
+                width: 200px;
+                border-bottom: 1px solid #bbbbbb;
+                padding: 10px 0px;
+                text-align: center;
+                font-size: 14px;
+                font-weight: 500;
+                color: #d8602a;
+            }
+           
+        }
+
+
+        .header-analitics-counter{
+            @include m.flex(row);
+
+            margin-bottom: 15px;
+            margin-top: 30px;
+            div{
+                margin-right: 30px;
+                h1{
+                    margin-right: 10px;
+                   font-size: 45px;
+                }
+                p{
+                    font-size: 13px;
+                    max-width: 100px;
+                    font-weight: 500;
+                    padding: 10px 0px;
+                }
+            }
+            .red{
+                color: #d8602a;
+
+            }
+            .green{
+                color: #219b60;
+            }
+        }
+
+
+        .header-analitics{
+            @include m.flex(row);
+            margin-bottom: 30px;
+            b{
+                position: relative;
+                width: 200px;
+                margin: 0px 5px;
+                text-align: center;
+                
+            }
+            b::before{
+                position: absolute;
+                bottom: -20px;
+                width: 100%;
+                left: 0px;
+                text-align: center;
+                content: attr(data);
+                font-weight: 500;
+                font-size: 14px;
+            }
+            
+        }
+
+        .row-analitics{
+            @include m.flex(row);
+            justify-content: start;
+            padding: 10px;
+            margin-bottom: 25px;
+            // justify-content: space-around;
+            div{
+                margin: 0px 5px;
+                width: 200px;
+                justify-content: center;
+                align-items: center;
+                p{
+                    
+                    text-align: center;
+                }
+                .tab{
+                    @include m.tab(#f5f5f5);
+         
+                }
+                .red {
+                    background: #f9bea4;
+                
+                }
+                .green {
+                    background: #b4f1d4;
+                }
+            }
+            .platform-analitics{
+                img{
+                    width: 25px;
+                    height: 25px;
+                    margin-right: 10px;
+                    margin-left: 20px;
+                }
+                p{
+                    width: 100%;
+                    text-align: start;
+                }
+
+            }   
+         }
+         
+    }
+    .tab-analitics{
+        @include m.flex(row);
+        
+        button{
+            background: none;
+            border-radius: 5px;
+            border: 1px solid #bbbbbb;
+            padding: 8px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        button:hover{
+            border: 1px solid black;
+        }
+
+        .button-open{
+            background: #dedede;
+        }
+
+        .date{
+
+            background: none;
+            border-radius: 5px;
+            border: 1px solid #bbbbbb;
+            padding: 8px 20px;
+            margin: 5px;
+
+            input[type=date]{
+                border: none;
+                cursor: pointer;
+                outline: none;
+            }
+            p{
+                margin: 0px 5px;
+                font-size: 20px;
+                font-weight: 400;
+            }
+            
+        }
+
+        
+    }
+}

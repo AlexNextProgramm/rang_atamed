@@ -1,0 +1,38 @@
+.notif-news{
+    position: fixed;
+    // position: relative;
+    top: 70px;
+    left: 0px;
+    min-width: 200px;
+    max-width: 300px;
+    max-height: max-content;
+    // border: 1px solid black;
+    z-index: 9999;
+    // background-color: rgba(231, 249, 199, 0.783);
+    .body{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-height: 100px ;
+        border-radius: 0px 5px 5px 0px;
+        border-right: 2px solid rgb(19, 66, 19) ;
+        background:#c8ffc5e8;
+        padding: 20px 10px 20px 10px;
+        p{
+            width: 100%;
+            text-align: center;
+            font-style: italic;
+            font-size: 14px;
+        }
+
+    }
+    .bad{
+        background:#f2cdcdc7;
+    }
+    .out-news{
+        transition: all 1s;
+        opacity: 0;
+    }
+}

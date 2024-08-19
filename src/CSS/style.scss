@@ -1,0 +1,226 @@
+@use './mixin.scss' as m;
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    font-family:'Montserrat', sans-serif; ;
+}
+:root{
+    --fon:#f4caff;
+    --border-color:#d2d2d2;
+    --text-color-opacity:#9a9a9a;
+    --a-color:#248ce6 ;
+    --btn-yellow:linear-gradient(0deg, rgb(255, 220, 0) 0%, rgb(255, 235, 59) 25%);
+}
+
+div{
+    display: flex;
+}
+body{
+    min-height: 100vh;
+}
+
+context{
+    min-height: 100vh;
+    overflow:auto;
+}
+content{
+    min-height: 94vh;
+}
+
+.btn-yellow{
+    @include m.btn-yellow;
+    position: fixed;
+}
+.btn-yellow:disabled{
+    background: var(--text-color-opacity) !important;
+}
+
+
+form{
+    display: flex;
+    justify-content: center;
+
+    flex-direction: column;
+}
+
+.loader::before{
+    content: ' ';
+    display: block;
+    // position: absolute;
+    width: 15px ;
+    height: 15px;
+    border-radius: 50%;
+    border-bottom: 1px solid rgb(157 157 155);
+    border-right: 1px solid rgb(157 157 155);
+    animation: loader 1s  linear infinite ;
+    animation-delay: 0s;
+    margin: 5px;
+}
+
+.deactive{
+    display: none;
+}
+.min{
+    font-size: 13px;
+    font-weight: 500;
+    font-style: italic;
+}
+tab{
+    padding: 8px 12px ;
+    border: none;
+    background: #248ce6;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    width: min-content;
+    height: min-content;
+    border-radius: 12px;
+    margin: 5px;
+}
+
+.flex{
+    display: flex;
+}
+
+.flex-center{
+    @extend .flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-column{
+    @extend .flex;
+    flex-direction: column;
+}
+
+loader-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    padding-top: 150px;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;;
+    img{
+        width: 100px;
+        height: 100px;
+        filter: contrast(10%);
+    }
+    p{
+        color: #808080;
+        font-size: 20px;
+        font-weight: 500;
+    }
+}
+
+
+loader-grose {
+    width: 48px;
+    height: 48px;
+    display: block;
+    margin: 18px auto;
+    position: relative;
+    color: #FFF;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+loader-grose::after,
+loader-grose::before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    width: 27px;
+    height: 27px;
+    top: 50%;
+    left: 50%;
+    transform: scale(0.5) translate(0, 0);
+    background-color: #272626;
+    border-radius: 50%;
+    animation: animloader 1s infinite ease-in-out;
+}
+
+loader-grose::before {
+    background-color: #ffe500;
+    transform: scale(0.5) translate(-48px, -48px);
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes animloader {
+    50% {
+        transform: scale(1) translate(-50%, -50%);
+    }
+}
+
+.flex-row{
+    @extend .flex;
+    flex-direction: row;
+}
+@keyframes loader {
+    0%{
+        transform: rotate(0deg);
+    }
+    
+    100%{
+        transform: rotate(-360deg);
+    }
+}
+
+
+.debag{
+    position: fixed;
+    color: rgb(11, 197, 11);
+    background: black;
+    bottom: 0px;
+    width: 100vw;
+    max-height: 300px;
+    overflow: auto;
+    font-size: 12px;
+    z-index: 9999;
+    border: 2px solid rgb(125, 0, 0);
+    font-weight: 400;
+}
+.select-tab{
+    @include m.tab(rgb(210, 210, 210));
+    margin: 10px 0px ;
+    padding: 8px 10px ;
+    font-size: 16px;
+
+    max-width: min-content;
+    border-radius: 10px;
+}
+.btn-url{
+    width: 100%;
+    margin: 10px 0px;
+    border: none;
+    background: none;
+    text-decoration:underline;
+    color: rgb(73, 73, 73);
+    cursor: pointer;
+    &:hover{
+        color: rgb(127, 127, 127);
+    }
+}
+.column{
+    display: flex;
+    flex-direction: column;
+}
+.center{
+    justify-content: center;
+    align-items: center;
+}
+

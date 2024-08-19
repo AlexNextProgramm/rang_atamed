@@ -1,0 +1,136 @@
+.admin-header{
+    width: 100%;
+    padding: 10px;
+    color: white;
+    display: flex;
+    background: black;
+    font-size: 20px;
+    font-weight: 800;
+    
+    .center-header{
+            // max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .btn-block {
+                logo{
+                    cursor: pointer;
+                }
+                button{
+                    padding: 5px 15px;
+                    color: white;
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    font-weight: 600;
+                    font-size: 16px;
+                }
+                img {
+                  width: 30px;
+                  height: 30px;
+                  cursor: pointer;
+                }
+                img:hover{
+                    transition: all 1s ease-out;
+                    transform: rotate(360deg)
+                }
+            }
+       
+    }
+}
+.home-header {
+    @extend .admin-header;
+    background: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .center-header{
+        max-width: 1200px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+        .btn-block{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            a{
+                background: linear-gradient(0deg, rgba(255, 220, 0, 1) 0%, rgba(255, 235, 59, 1) 25%);
+                border: none ;
+                padding: 10px 25px;
+                border-radius: 5px;
+                margin: 0px 5px;
+                font-size: 16px;
+                font-weight: 500;
+                cursor: pointer;
+                text-decoration: none;
+            }
+           
+        }
+    }
+}
+.select-header{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 0px 10px;
+    font-size: 14px;
+    font-weight: 400;
+    // border: 1px solid white;
+    align-items: center;
+    padding: 5px;
+    height: 30px;
+    min-width: 200px;
+    margin-left: 35px;
+    .block-select{
+        position: absolute;
+        background: black;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+        z-index: 9999;
+        top: 30px;
+        width: max-content;
+        overflow: hidden;
+        height: 0px;
+        left: 0px;
+        transition: height 0.5s;
+        border-radius: 10px;
+        li{
+            list-style-type:none;
+            cursor: pointer;
+            padding: 2px 5px;
+            text-align: center;
+        }
+        li:hover{
+            color: rgb(76, 76, 255);
+        
+        }
+
+    }
+    span{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+        // height: 20px ;
+        transform: rotate(90deg);
+        cursor: pointer;
+    }
+    control{
+        padding: 3px;
+        min-width: 200px;
+        text-align: center;
+    }
+    .open{
+        height: var(--h-sel);
+     
+        
+    }
+    
+}

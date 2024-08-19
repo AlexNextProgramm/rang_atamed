@@ -1,0 +1,91 @@
+@use './../mixin.scss' as m;
+
+.search{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    max-width: 350px;
+
+
+    .search-platform{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        div{
+            display: flex;
+            flex-direction: row;
+            margin: 3px;
+            padding: 5px 15px;
+            border: 1px solid rgb(126, 126, 126);
+            border-radius: 5px;
+            cursor: pointer;
+            
+            img{
+                width: 20px;
+                height: 20px;
+            }
+            span{
+                margin-left: 5px;
+                font-style: 18px;
+                font-weight: 500;
+            }
+        }
+    }
+    .sort-header {
+             font-size: 14px;
+             font-weight: 400;
+             font-style: italic;
+             padding-left: 10px;
+             width: 100%;
+             border-bottom: 1px solid #e5e5e5;
+             padding-top: 5px;
+             padding-bottom: 5px;
+             margin-top: 20px;
+    }
+    .search-star{
+        display: flex;
+        flex-direction: row;
+        margin-top: 5px;
+        justify-content: start;
+        align-items: center;
+        span{
+            text-align: center;
+            width: 40px;
+            height: 45px;
+            border-radius: 5px;
+            border: 1px solid rgb(126, 126, 126);
+            padding: 10px 10px;
+            font-size: 20px;
+            font-weight: 400;
+            margin: 5px;
+            cursor: pointer;
+        }
+    }
+    .active{
+        background: #e5e5e5;
+    }
+    .search-date{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+        input[type=date]{
+            padding: 10px 6px;
+            font-size: 16px;
+            border: 1px solid rgb(126, 126, 126);
+            border-radius: 8px;
+            background-color: #e5e5e5;
+            outline: none;
+            margin-top: 5px;
+            margin-right: 10px;
+            }
+       
+    }
+    .search-tab{
+       @include m.search-tab;
+    }
+}

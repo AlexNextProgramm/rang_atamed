@@ -1,0 +1,171 @@
+.div-center{
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
+    width: 100%;
+    // max-width: 1200px;
+    padding: 30px 10px 10px 10px;
+   ul{
+    margin-top: 50px;
+    li{
+        display: flex;
+        flex-direction: row;
+        width: max-content;
+        align-items: center;
+        margin: 20px 0px;
+        
+        p{
+            font-size: 25px;
+            font-weight: 600;
+        }
+        img{
+            width: 40px;
+            height: 40px;
+            margin-right: 20px;
+        }
+    }
+   }
+   h1{
+    margin: 20px;
+   }
+   h2{
+    font-style: italic;
+    font-weight: 500;
+   }
+}
+
+
+.form-enter{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 400px;
+    width: 100%;
+    padding: 30px 10px 30px;
+    background: #ffe034;
+    border-radius: 10px;
+    box-shadow: 8px 4px 10px 0px #e9e9e9;
+    margin-top: 30px;
+
+    h2{
+        margin: 10px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+    .contur{
+        position: relative;
+        padding: 5px 5px 10px 5px;
+        border: 1px solid red;
+        border-radius: 5px;
+        margin: 10px 0px 3px 0px;
+        width: 100%;
+        max-width: 270px;
+        
+        input{
+            width: 100%;
+            outline: none;
+            min-height: 35px;
+            padding: 5px;
+            border-radius: 5px;
+            // max-width: 220px;
+            border: none;
+            font-size: 18px;
+        }
+    }
+    .contur::before{
+        position: absolute;
+        content: attr(data);
+        color: red;
+        font-size: 13px;
+        bottom: -8px;
+        z-index: 9999;
+        background: #ffe034;
+        left: 10px;
+        padding: 0px 5px;
+    }
+    .deactiv{
+        border: 1px solid rgba(255, 0, 0, 0);
+    }
+    .deactiv::before{
+        color: #ffe13400;
+    }
+    
+    button{
+        border: none;
+        padding: 10px 25px;
+        border-radius: 5px;
+        margin: 5px 5px;
+        font-size: 16px;
+        font-weight: 500;
+         cursor: pointer;
+         margin-top: 20px;
+
+
+    }
+
+    .decore-1{
+        position: absolute;
+        width: 36px;
+        height: 20px;
+        background: #ffe034;
+        top: 40px;
+        right: -29px;
+        border-radius: 30px;
+    }
+    
+    .decore-2 {
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            background: linear-gradient(90deg, rgb(235 235 235) 52%, rgba(237, 237, 237, 0.04) 77%);
+            top: 60px;
+            right: -14px;
+            border-radius: 30px;
+    }
+    .decore-3{
+     position: absolute;
+    width: 36px;
+    height: 20px;
+    background: #ffe034;
+    top: 80px;
+    right: -15px;
+    border-radius: 30px;
+    }
+     .decore-4 {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ffe034;
+            top: 40px;
+            right: -57px;
+        }
+    .decore-5{
+        @extend .decore-1;
+        bottom: 40px;
+        top: auto;
+        left: -29px;
+    }
+    .decore-6{
+        @extend .decore-2;
+        top: auto;
+        bottom: 60px;
+       background: white;
+        left: -12px;
+    }
+    .decore-7{
+        @extend .decore-3;
+        top: auto;
+        bottom: 80px;
+        left: -15px;
+    }
+    .decore-8{
+        @extend .decore-4;
+        left: -57px;
+        top: auto;
+        bottom: 40px;
+    }
+}
