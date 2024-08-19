@@ -1,0 +1,29 @@
+{
+  "name": "pet-speed/pet",
+  "description": "PHP framework",
+  "authors": [
+    {
+      "name":"Alexandr",
+      "email":"lachinalexandr23@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Pet\\": "vendor/Pet"
+    },
+    "files": [
+      "vendor/env/env.php",
+      "dist/PHP/conf/app.php",
+      "dist/PHP/conf/router_conf.php",
+      "dist/PHP/conf/db_conf.php",
+      "dist/PHP/conf/session_conf.php",
+      "vendor/Pet/function/function.php",
+      "vendor/Pet/ErListen/dump.php",
+      "vendor/Pet/chain/chain.php"
+    ]
+  },
+  "minimum-stability": "dev",
+  "require": {
+  }
+}
+

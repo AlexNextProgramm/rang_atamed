@@ -1,0 +1,17 @@
+<?php
+namespace Model\{name}Model;
+use Pet\Model\Model;
+use Pet\Request\Request;
+
+
+class {name}Model extends Model{
+
+    public $table = {table};
+    public $insert = false;
+    public $join = {join};
+
+    function index(Request $request){
+
+    }
+}
+?>

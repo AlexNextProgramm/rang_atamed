@@ -1,0 +1,23 @@
+<?php
+use Pet\Migration\Migration;
+use Pet\Migration\Schema;
+use Pet\Migration\Table;
+            
+class {name} extends Migration{
+
+    public function up(){
+
+    Schema::create("new", function(Table $table){
+
+    $table->id();
+    $table->timestamp();
+
+    });
+
+   }
+
+    function back(){
+        Schema::drop("new");
+    }
+}
+?>

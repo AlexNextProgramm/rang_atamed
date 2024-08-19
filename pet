@@ -1,0 +1,26 @@
+<?php
+
+    include_once('./vendor/autoload.php');
+    include_once('./vendor/command/command.php');
+    include_once('./vendor/Pet/chain/chain.php');
+    include_once('./vendor/command/FTP/FTP.php');
+    
+    use Command\Command;
+    
+    $DIR  = __DIR__;
+    
+    $option = [];
+
+    if($argc > 1){
+        $option = $argv;
+        unset($option[0]);
+    }else{
+        die('Not arguments console');
+    }
+
+    Command::start($argv, $DIR);
+
+
+
+
+?>

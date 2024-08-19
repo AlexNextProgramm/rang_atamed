@@ -1,0 +1,13 @@
+<?php
+namespace Middleware\{name}Middleware;
+use Pet\Controller\Controller;
+use Pet\Request\Request;
+
+
+class {name}Middleware extends Controller{
+
+    function index(Request $request){
+
+    }
+}
+?>
