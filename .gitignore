@@ -3,3 +3,10 @@
 /.vscode/
 .env
 /session/
+/cache/*/
+Log.txt
+LogSql.txt
+Rename.docx
+*-lock.json
+package.json
+/desktop.ini
