@@ -56,36 +56,43 @@ class Command{
     }
 
     public function ftp_load(){
+
         $DIRPROJECT = $this->DIR.'/'.env('FOLDER_PROJECT', 'dist');
         $DIRVENDOR = $this->DIR . '/vendor';
 
-      
+        $is_npm = 'n';
         echo "Выполнить build Webpack перед загрузкой на сервер? (y/n)";
-        exec(__DIR__.'/bat/input.bat', $output);
-
-       if($output[2] == 'y'){
-        exec("cd {$this->DIR}&& npm run build", $output);
+        if (PHP_OS == 'Linux'){
+            exec('./vendor/command/bat/input.sh', $output);
+            $is_npm = $output[0];
+        }
+        if (PHP_OS == 'WINNT'){
+            exec(__DIR__.'/bat/input.bat', $output);
+            $is_npm = $output[2];
+        }
+       if($is_npm == 'y'){
+        exec('cd "'.$this->DIR.'"&& npm run build', $output);
         foreach($output as $row){
             echo $row."\n";
         }
        }
        
-        $ftp = new Ftp();
+    //     $ftp = new Ftp();
 
-        $ftp->host = env('FTP_HOST');
-        $ftp->login = env('FTP_LOGIN');
-        $ftp->password = env('FTP_PASSWORD');
+    //     $ftp->host = env('FTP_HOST');
+    //     $ftp->login = env('FTP_LOGIN');
+    //     $ftp->password = env('FTP_PASSWORD');
 
-        if($ftp->connectCount(5))
-        {
-            $ftp->dirHost = env('FTP_FOLDER');
-            $ftp->dir(env('FTP_FOLDER'));
-            $ftp->putDirFiles($DIRPROJECT, 'dist');
-            $ftp->putDirFiles($DIRVENDOR, 'vendor');
-            $ftp->close();
-        }else{
-            echo 'Not ftp connect';
-        }
+    //     if($ftp->connectCount(5))
+    //     {
+    //         $ftp->dirHost = env('FTP_FOLDER');
+    //         $ftp->dir(env('FTP_FOLDER'));
+    //         $ftp->putDirFiles($DIRPROJECT, 'dist');
+    //         $ftp->putDirFiles($DIRVENDOR, 'vendor');
+    //         $ftp->close();
+    //     }else{
+    //         echo 'Not ftp connect';
+    //     }
     }
   
    
