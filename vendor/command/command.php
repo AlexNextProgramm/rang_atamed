@@ -61,9 +61,15 @@ class Command{
         $DIRVENDOR = $this->DIR . '/vendor';
         $DIRIGNORE = explode("|", env('FTP_FOLDER_EXEPTION'));
         $FILEIGNORE = explode("|", env('FTP_FILE_EXEPTION'));
+
         $is_npm = 'n';
         $is_vendor = false;
-
+        exec('git branch', $output);
+        foreach($output as $branch){
+            if(strpos($branch, "*") !== false){
+                file_put_contents($this->DIR.'/'.env('FOLDER_PROJECT', 'dist').'/PHP/api/GITINFO.txt', 'Загруженая ветка '.$branch);
+            }
+        }
         echo "Выполнить build Webpack перед загрузкой на сервер? (y/n)";
         osInput($is_npm);
         if($is_npm == 'y'){
