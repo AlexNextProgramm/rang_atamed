@@ -16,21 +16,13 @@ class Ftp{
     public $pasv = true;
     private $dirpwd = "";
     public $fileIgnore = [];
-    public $folderIgnore = [];
-
+    public $dirIgnore = [];
 
     function connect():bool
     {
         try{
             $this->connect = ftp_connect($this->host, $this->port);
-            
-            if($this->connect){
-                ftp_login($this->connect,$this->login, $this->password);
-                return true;
-            }else{
-                return false;
-            }
-
+            return $this->connect && @ftp_login($this->connect,$this->login, $this->password)? true :false;
         } catch (Exception $e) {
             return false;
         }
@@ -56,13 +48,15 @@ class Ftp{
 
     function loadfile($dirFile, $ftpDir, $fileName):bool
     {
-
+        if(in_array($fileName, $this->fileIgnore) || in_array("$ftpDir.'/'.$fileName", $this->fileIgnore) ){
+            echo "Игнорируемый файл $fileName \n";
+            return false;
+        }
         echo "Загружаю файл $fileName \n";
 
         $fp = fopen($dirFile.'/'. $fileName , 'r');
 
         if(ftp_fput($this->connect, $ftpDir.'/'.$fileName, $fp, FTP_BINARY)){
-            
             echo "Файл $fileName успешно загружен \n";
             return true;
         }else{
@@ -84,7 +78,7 @@ class Ftp{
 
 
     function dir($dir){
-
+      
         if (ftp_chdir($this->connect, $dir))
         {
             $this->dirpwd = $dir;
@@ -174,7 +168,6 @@ class Ftp{
 
     function putDirFiles($dirLocal, $dirHost){
         ftp_pasv($this->connect, $this->pasv);
-      
         $files = scandir($dirLocal);
 
        foreach ($files as $file) {
@@ -182,7 +175,6 @@ class Ftp{
            if(is_file($dirLocal . '/' . $file)){
                $this->loadfile($dirLocal, $dirHost,  $file );
            }
-
        }
 
      $list  = $this->list($dirHost);
@@ -190,8 +182,13 @@ class Ftp{
        foreach($files as $file){
             if($file == '.' || $file == '..') continue;
 
+
             if(is_dir($dirLocal.'/'.$file)){
 
+            if(in_array($file, $this->dirIgnore)){
+                echo "Игнорируемая директория $file \n";
+                continue;
+            }
             if(!$this->is_list($list, $file)){
                 $this->createDir($dirHost . '/' . $file);
             }

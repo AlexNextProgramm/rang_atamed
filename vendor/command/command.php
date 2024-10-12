@@ -59,40 +59,44 @@ class Command{
 
         $DIRPROJECT = $this->DIR.'/'.env('FOLDER_PROJECT', 'dist');
         $DIRVENDOR = $this->DIR . '/vendor';
-
+        $DIRIGNORE = explode("|", env('FTP_FOLDER_EXEPTION'));
+        $FILEIGNORE = explode("|", env('FTP_FILE_EXEPTION'));
         $is_npm = 'n';
+        $is_vendor = false;
+
         echo "Выполнить build Webpack перед загрузкой на сервер? (y/n)";
-        if (PHP_OS == 'Linux'){
-            exec('./vendor/command/bat/input.sh', $output);
-            $is_npm = $output[0];
-        }
-        if (PHP_OS == 'WINNT'){
-            exec(__DIR__.'/bat/input.bat', $output);
-            $is_npm = $output[2];
-        }
-       if($is_npm == 'y'){
-        exec('cd "'.$this->DIR.'"&& npm run build', $output);
-        foreach($output as $row){
-            echo $row."\n";
-        }
+        osInput($is_npm);
+        if($is_npm == 'y'){
+            exec('cd "'.$this->DIR.'"&& npm run build', $output);
+            foreach($output as $row){
+                echo $row."\n";
+            }
        }
+       echo "Выполнить загрузку папки vendor? (y/n)";
+       osInput($is_vendor);
+         $ftp = new Ftp();
+
+       $ftp->host = env('FTP_HOST');
+       $ftp->login = env('FTP_LOGIN');
+       $ftp->fileIgnore = $FILEIGNORE;
+       $ftp->dirIgnore = $DIRIGNORE;
        
-    //     $ftp = new Ftp();
+        if (trim(env('FTP_PASSWORD')) == '') {
+            echo "Не введен пароль \n";
+            return false;
+        }
 
-    //     $ftp->host = env('FTP_HOST');
-    //     $ftp->login = env('FTP_LOGIN');
-    //     $ftp->password = env('FTP_PASSWORD');
-
-    //     if($ftp->connectCount(5))
-    //     {
-    //         $ftp->dirHost = env('FTP_FOLDER');
-    //         $ftp->dir(env('FTP_FOLDER'));
-    //         $ftp->putDirFiles($DIRPROJECT, 'dist');
-    //         $ftp->putDirFiles($DIRVENDOR, 'vendor');
-    //         $ftp->close();
-    //     }else{
-    //         echo 'Not ftp connect';
-    //     }
+        $ftp->password = env('FTP_PASSWORD');
+         if($ftp->connectCount(5))
+         {
+            $ftp->dirHost = env('FTP_FOLDER');
+            $ftp->dir(env('FTP_FOLDER'));
+            $ftp->putDirFiles($DIRPROJECT, 'dist');
+            if($is_vendor == 'y' )$ftp->putDirFiles($DIRVENDOR, 'vendor');
+            $ftp->close();
+         }else{
+             echo 'Not ftp connect';
+         }
     }
   
    
