@@ -2,7 +2,6 @@ class Widgets {
     contener = 'widgets-rang';
     api = '';
     host = '';
-
     data;
     platform = [];
     filial = [];
