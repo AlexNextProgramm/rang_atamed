@@ -67,7 +67,7 @@ class Command{
         exec('git branch', $output);
         foreach($output as $branch){
             if(strpos($branch, "*") !== false){
-                file_put_contents($this->DIR.'/'.env('FOLDER_PROJECT', 'dist').'/PHP/api/GITINFO.txt', 'Загруженая ветка '.$branch);
+                file_put_contents($this->DIR.'/'.env('FOLDER_PROJECT', 'dist').'/PHP/api/GITINFO.txt', 'Загруженая ветка <'.$branch .'>   Актуальность: '.date('d.m.Y'));
             }
         }
         echo "Выполнить build Webpack перед загрузкой на сервер? (y/n)";
