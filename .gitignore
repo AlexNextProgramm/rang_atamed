@@ -1,6 +1,7 @@
 /Log.txt
 /LogSql.txt
 Rename.docx
+!/dist/PHP/lib/widgets/
 /node_modules/
 /.vscode/
 .env
@@ -9,7 +10,6 @@ Rename.docx
 *-lock.json
 package.json
 /desktop.ini
-desktop.ini
 /dist/view/JS
 /dist/view/CSS
 /dist/view/images/
