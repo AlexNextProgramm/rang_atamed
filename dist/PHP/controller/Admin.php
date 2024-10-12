@@ -33,7 +33,6 @@ class AdminController extends Controller{
         $filial = (new FilialModel())->filialCompany(attr('user')['company_id']);
         $prefix = [];
     
-
         foreach($filial as $key => $fil){
             if($fil['imap']){
                 foreach(json_decode($fil['imap'], true)['prefix'] as $pr){

@@ -113,7 +113,7 @@ class ClientModel extends Model{
             $data['platform_path'] = $platform_path;
             $w .= $platform_path;
         }
-
+    
         $data['watch'] = $watch? $watch."//".$w : $w;
 
         $data['date_path'] = date('Y-m-d H:i:s');

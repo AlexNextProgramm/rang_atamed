@@ -3,10 +3,10 @@ class  Widgets
 
     contener = "widgets-rang"
     api = ""
-    // host = "http://localhost:5555"
-    host = "https://rang.altamedplus.ru"
+    host = "https://local"
+    // host = "https://rang.altamedplus.ru"
     data;
-    plaform = [];
+    platform = [];
     filial = [];
     header = true;
 
@@ -32,7 +32,7 @@ class  Widgets
 
     // строим
     build(data){
-
+console.log(data)
        const widgetsElement = document.querySelector(this.contener);
         console.log(widgetsElement);
        //  задаем блок
@@ -47,23 +47,29 @@ class  Widgets
 
            if(this.header){
                let h = this.createEl('h2');
-                   h.textContent = filial;
+                   h.textContent = filial.toLocaleUpperCase();
                    blokcolumn.append(h);
            }
 
         let blockrow = this.createEl('div', 'block-row')
         
-            Object.keys(data[filial]).forEach((plaform)=>{
+            Object.keys(data[filial]).forEach((platform)=>{
 
-                if(!this.excludePlatform(plaform)) return;
+                if(!this.excludePlatform(platform)) return;
 
-            const part = this.createEl('div');
+            const part = this.createEl('div', 'part');
 
-               let star = this.createEl('p')
-                   star.textContent = data[filial][plaform]['star']
+               let star = this.createEl('div', 'star')
+               star.innerHTML = `<p class='name'>${data[filial][platform]['origin']}</p><div>
+               <img class="star-img" src="${
+                 this.host + "/PHP/lib/widgets/images-wigets/star.png"
+               }"></img>
+                <b>${data[filial][platform]["star"]}</b>
+                <p>/5</p></div>`;
+                //    star.textContent = data[filial][plaform]['star']
 
                const img = this.createEl('img')
-                     img.src = data[filial][plaform]['img']
+                     img.src = data[filial][platform]['img']
 
                 part.append(img, star)
                 blockrow.append(part)
@@ -91,11 +97,11 @@ class  Widgets
         return el;
     }
 
-    excludePlatform(plaform){
+    excludePlatform(platform){
 
-        if(this.plaform.length != 0){
+        if(this.platform.length != 0){
 
-            return this.plaform.includes(plaform)
+            return this.platform.includes(platform)
         }
 
         return true;

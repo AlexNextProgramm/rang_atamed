@@ -142,7 +142,7 @@ class Matchs{
                         if(array_key_exists($t, $strTwo)){
                             // var_dump($strTwo[$t] == $abc[0]);
                             // print_r($strTwo[$t].' == '.$abc[0] . '<br>');
-                            if($strTwo[$t] == $abc[0]){
+                            if(empty($abc[0]) && $strTwo[$t] == $abc[0]){
                                 $result += $delta;
                             // $t++;
                             }
