@@ -14,3 +14,5 @@ desktop.ini
 /dist/view/CSS
 /dist/view/images/
 /dist/view/index.php
+/dist/PHP/api/sample.json
+/dist/PHP/api/news.json
