@@ -15,6 +15,8 @@ class Ftp{
     public $dirHost = "";
     public $pasv = true;
     private $dirpwd = "";
+    public $fileIgnore = [];
+    public $folderIgnore = [];
 
 
     function connect():bool
@@ -173,10 +175,7 @@ class Ftp{
     function putDirFiles($dirLocal, $dirHost){
         ftp_pasv($this->connect, $this->pasv);
       
-
         $files = scandir($dirLocal);
-
-
 
        foreach ($files as $file) {
            if ($file == '.' || $file == '..') continue;

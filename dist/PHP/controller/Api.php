@@ -106,7 +106,8 @@ class ApiController extends Controller{
        $clients = (new ClientModel())->find(['path'=> "POSITIVE"], ['name', 'platform_path', 'date_path', 'url', 'api', "id", "filial"]);
        $count = count($clients);
        $countResult = 0;
-      $namesResult = [];
+       $namesResult = [];
+
        foreach($clients as $client){
            
            $search = [
@@ -117,11 +118,12 @@ class ApiController extends Controller{
             ];
             
             $rewiews = (new ReviewsModel($client['api']))->getReviews($search);
-            $result = false ;
-
+            
             foreach($rewiews as $row){
                 // в name
+                $result = null;
                 foreach(explode(' ', $client['name']) as $key => $cName){
+                    
 
                     if( str_contains(strtolower($row['name']), strtolower($cName)) ||
                         str_contains(strtolower($row['text']), strtolower($cName)))
@@ -131,20 +133,20 @@ class ApiController extends Controller{
                     }
 
                     if(!$result && $key == 0){
-
                         $m = new Matchs();
                         
                         if($m->verifiString($cName, $row['name']) || $m->verifiString($cName, $row['text'])){
                         $result = "MASHINE";
                         }
-
+                        break;
                     }
                 }
 
                 if($result){
-                    (new ClientModel())->status_path($client['url'], $result, null, null, $row['text']);
+                    (new ClientModel())->status_path($client['url'], $result, null, null, $row['text'], $row['watch']);
                     $countResult++;
                     $namesResult[] = '<i>'.$row['name']." -- status: ".$result."</i>";
+                 
                 }
 
             }
@@ -294,7 +296,7 @@ class ApiController extends Controller{
         header("Access-Control-Max-Age", "3600");
         header('Access-Control-Allow-Headers: Authorization, Origin, X-Requested-With, Accept, Content-Type');
         header('Content-type: application/json');
-
+        header('Cache-control: no-cache');
         $filials = explode(';',attr('filial'));
         $data = [];
 
@@ -306,14 +308,19 @@ class ApiController extends Controller{
                 'api'=>supple('api'),
                 'filial'=>$filial,
             ],['name'], ['parsers-list'=>'parser_id'] );
+
+            $origin = json_decode(file_get_contents(__DIR__.'/../api/names.json'), true);
+
             foreach($platforms as $platform)
             {
 
                  $data[$filial][$platform['name']] = [];
                  $data[$filial][$platform['name']]['star'] = (new AnaliticsModel())->actual(supple('api'), $platform['name'] ,$filial);
-                $data[$filial][$platform['name']]['img'] = env('WEBSITEDEV')."/PHP/lib/widgets/images-wigets/{$platform['name']}.webp";
+                 $data[$filial][$platform['name']]['img'] = env('WEBSITEDEV')."/PHP/lib/widgets/images-wigets/{$platform['name']}.png";
+                $data[$filial][$platform['name']]['origin'] = $origin[$platform['name']] ;
             }
         }
+       
        echo  json_encode($data, JSON_UNESCAPED_UNICODE);
                  
 

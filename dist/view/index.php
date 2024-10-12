@@ -18,7 +18,7 @@ use Pet\Middleware\MiddlewareCSRF;
     <script>
         var InertiaRequest = <?= Inertia::$request; ?>;
     </script>
-<script defer="defer" src="http://localhost:5555/view/JS/main2119f4ea9a29b4e44cfc.js"></script></head>
+<script defer="defer" src="http://localhost:5555/view/JS/maina5c2967e649f3e3fa514.js"></script><link href="http://localhost:5555/./view/CSS/maina5c2967e649f3e3fa514.css" rel="stylesheet"></head>
 
 <body>
     <context></context>

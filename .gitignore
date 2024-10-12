@@ -1,5 +1,15 @@
-.gitignore
+/Log.txt
+/LogSql.txt
+Rename.docx
 /node_modules/
 /.vscode/
 .env
-/session/
+/session
+/cache
+*-lock.json
+package.json
+/desktop.ini
+desktop.ini
+/dist/view/JS
+/dist/view/CSS
+/dist/view/images/

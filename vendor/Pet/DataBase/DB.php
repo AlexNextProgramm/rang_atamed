@@ -266,7 +266,7 @@ class DB{
             $DB = $this->NameBase;
             $tb = $this->table; 
             $time =  $this->query("SELECT UPDATE_TIME FROM information_schema.tables WHERE TABLE_SCHEMA = '$DB' AND TABLE_NAME = '$tb';");
-            return strtotime($time[0]['UPDATE_TIME']);
+            return $time[0]['UPDATE_TIME']?strtotime($time[0]['UPDATE_TIME']):time();
         }
         return 0;
     }

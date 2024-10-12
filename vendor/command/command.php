@@ -61,24 +61,15 @@ class Command{
 
       
         echo "Выполнить build Webpack перед загрузкой на сервер? (y/n)";
-       exec(__DIR__.'/bat/input.bat', $output);
+        exec(__DIR__.'/bat/input.bat', $output);
 
        if($output[2] == 'y'){
-        
         exec("cd {$this->DIR}&& npm run build", $output);
         foreach($output as $row){
             echo $row."\n";
         }
        }
        
-
-
-
-
-      
-       
-  
-
         $ftp = new Ftp();
 
         $ftp->host = env('FTP_HOST');
