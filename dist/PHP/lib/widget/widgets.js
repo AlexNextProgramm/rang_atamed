@@ -17,7 +17,7 @@ class Widgets {
             filial += this.filial.length - 1 == i ? fil : fil + ';';
         });
 
-        this.get(this.host + '/widgets/' + this.api + filial).onload = request => {
+        this.get(this.host + '/widget/' + this.api + filial).onload = request => {
             const response = request.target.responseText;
             let data = JSON.parse(response);
             this.build(data);
@@ -50,7 +50,7 @@ class Widgets {
 
                 let star = this.createEl('div', 'star');
                 star.innerHTML = `<p class='name'>${data[filial][platform]['origin']}</p><div>
-                <img class="star-img" src="${this.host + '/PHP/lib/widgets/images-wigets/star.png'}"></img>
+                <img class="star-img" src="${this.host + '/PHP/lib/widget/images-widgets/star.png'}"></img>
                 <b>${data[filial][platform]['star']}</b>
                 <p>/5</p></div>`;
                 //    star.textContent = data[filial][plaform]['star']

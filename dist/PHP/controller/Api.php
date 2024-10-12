@@ -264,7 +264,7 @@ class ApiController extends Controller {
     // внешнее подключение виджета 
     public function getJsWigets() {
         header("Content-type: text/javascript");
-        $js =   file(__DIR__ . '/../lib/widgets/widgets.js');
+        $js =   file(__DIR__ . '/../lib/widget/widgets.js');
         foreach ($js as $i => $row) {
             if (str_contains($row, 'host')) {
                 $host = "    host = '";
@@ -276,7 +276,7 @@ class ApiController extends Controller {
     }
     public function getCssWigets() {
         header("Content-type: text/css");
-        echo  file_get_contents(__DIR__ . '/../lib/widgets/widgets.css');
+        echo  file_get_contents(__DIR__ . '/../lib/widget/widgets.css');
     }
 
     // отдаем данные которые запросил wigets
@@ -307,7 +307,7 @@ class ApiController extends Controller {
 
                 $data[$filial][$platform['name']] = [];
                 $data[$filial][$platform['name']]['star'] = (new AnaliticsModel())->actual(supple('api'), $platform['name'], $filial);
-                $data[$filial][$platform['name']]['img'] = env('WEBSITEDEV') . "/PHP/lib/widgets/images-wigets/{$platform['name']}.png";
+                $data[$filial][$platform['name']]['img'] = env('WEBSITEDEV') . "/PHP/lib/widget/images-widgets/{$platform['name']}.png";
                 $data[$filial][$platform['name']]['origin'] = $origin[$platform['name']];
             }
         }
