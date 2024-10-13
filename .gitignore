@@ -5,7 +5,8 @@ Rename.docx
 /node_modules/
 /.vscode/
 .env
-/session
+/session/
+/Session/
 /cache
 *-lock.json
 package.json
