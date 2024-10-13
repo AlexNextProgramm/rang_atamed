@@ -11,7 +11,7 @@ spl_autoload_register(function (string $class){
        search_file($path, $classN);
 });
 
-date_default_timezone_set('Europe/Moscow');
+
 Application::started()->middleware()
 ->fileRouter(__DIR__.'/PHP/router/router.php')
 ->query();
