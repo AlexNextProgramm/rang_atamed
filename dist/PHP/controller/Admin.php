@@ -14,6 +14,7 @@ use Model\Parser_listModel\Parser_listModel;
 use Model\ParsersModel\ParsersModel;
 use Model\ReviewsModel\ReviewsModel;
 use Model\ClientModel\ClientModel;
+use Model\HistoryClientModel\HistoryClientModel;
 use Pet\DataBase\DBSQL;
 
 class AdminController extends Controller{
@@ -91,26 +92,32 @@ class AdminController extends Controller{
     }
 
 
-    public function request(Request $request){
+    public function request(Request $request)
+    {
         $search = attr('search');
-          if($search && $search != ''){
-                  $request->set(['client' => (new ClientModel())->getsearch(attr('api'), cookie('filial'), $search)]);
-          }else{
-              $request->set(['client'=>(new ClientModel())->getReport(attr('api'), cookie('filial'))]);
-          }
+        if ($search && $search != '') {
+            $request->set(['client' => (new ClientModel())->getsearch(attr('api'), cookie('filial'), $search)]);
+        } else {
+            $request->set(['client' => (new ClientModel())->getReport(attr('api'), cookie('filial'))]);
+        }
+        $history = [];
+        foreach ($request->attribute['client'] as $client) {
+            $history[$client['id']] = (new HistoryClientModel())->getHistory($client['id']);
+        }
+        $request->set(['history' => $history]);
 
         Inertia::render('admin/request', $request);
     }
 
 
-    public function setBonus(){ 
+    public function setBonus()
+    {
         $client = new ClientModel();
         $client->insert = true;
         $id = attr('id');
         $client->update(['bonus_check' => true], "`id`='$id'");
         $this->json('{}');
     }
-    
 
     public function SettingPage(Request $request){
        $USERS = (new UserModel)->getAllUsers(["company_id"=>attr('user')['company_id']],

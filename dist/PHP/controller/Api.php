@@ -80,7 +80,7 @@ class ApiController extends Controller {
 
     function sendClient(Request $request) {
 
-        date_default_timezone_set('Europe/Moscow');
+        date_default_timezone_set(env('TIME_ZONE', 'Europe/Moscow'));
 
         $data = (new ClientModel())->setStack($request);
 
@@ -101,13 +101,18 @@ class ApiController extends Controller {
 
 
     public function match() {
-
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
         $clients = (new ClientModel())->find(['path' => "POSITIVE"], ['name', 'platform_path', 'date_path', 'url', 'api', "id", "filial"]);
         $count = count($clients);
         $countResult = 0;
         $namesResult = [];
 
         foreach ($clients as $client) {
+            if (strtotime($client['date_path']) < mktime(0, 0, 0, date('m') - 1, date('d'), date("Y"))) {
+                (new ClientModel())->status_path($client['url'], "DESTROYED", null, null, null);
+                continue;
+            }
 
             $search = [
                 'platform' => [$client['platform_path']],
@@ -117,39 +122,40 @@ class ApiController extends Controller {
             ];
 
             $rewiews = (new ReviewsModel($client['api']))->getReviews($search);
+            // Подготовка данных клиента
+            try {
+                $client['name'] = explode(' ', $client['name']);
+                $FAMILY = mb_strtolower(strtolower(trim($client['name'][0])));
+                $NAME = mb_strtolower(strtolower(trim($client['name'][1])));
+                $SURNAME = !empty($client['name'][2]) ? mb_strtolower(trim($client['name'][2])) : " ";
+            } catch (Exception $e) {
+                continue;
+            }
 
             foreach ($rewiews as $row) {
-                // в name
                 $result = null;
-                foreach (explode(' ', $client['name']) as $key => $cName) {
+                $text = mb_strtolower(str_replace(['.', ','], '', $row['text']));
+                $nameIncoming = mb_strtolower((str_replace(['.', ','], '', $row['name'])));
+                $options = include __DIR__ . '/../lib/Match.php';
 
-                    if (
-                        str_contains(strtolower($row['name']), strtolower($cName)) ||
-                        str_contains(strtolower($row['text']), strtolower($cName))
-                    ) {
-                        if ($key == 0) $result = "FAMILY";
-                        if (!$result && $key == 1) $result = "NAME";
-                    }
-
-                    if (!$result && $key == 0) {
-                        $m = new Matchs();
-
-                        if ($m->verifiString($cName, $row['name']) || $m->verifiString($cName, $row['text'])) {
-                            $result = "MASHINE";
-                        }
+                foreach ($options as $option) {
+                    if (str_contains($nameIncoming, $option) || str_contains($text, $option)) {
+                        $result = 'FAMILY';
                         break;
                     }
                 }
 
                 if ($result) {
-                    (new ClientModel())->status_path($client['url'], $result, null, null, $row['text'], $row['watch']);
+                    (new ClientModel())->status_path($client['url'], $result, null, null, $row['text']);
                     $countResult++;
                     $namesResult[] = '<i>' . $row['name'] . " -- status: " . $result . "</i>";
+                    $result = null;
+                    break;
                 }
             }
         }
 
-        echo "Принято к сверки клиентов: $count ; <br> В сверку попало: $countResult <br><b>Имена</b> <br>" . implode('<br>', $namesResult);
+        echo "Принято к сверки клиентов: $count ; <br> Сверилось: $countResult <br><b>Имена</b> <br>" . implode('<br>', $namesResult);
     }
 
 
@@ -164,7 +170,7 @@ class ApiController extends Controller {
                 $imap['filial'] = $filial['filial'];
                 $imap['api'] = $filial['api'];
 
-                $reviews = (new ImapGet)->getReviews($imap);
+                $reviews = (new ImapGet())->getReviews($imap);
                 if (count($reviews) != 0) {
                     foreach ($reviews as $prefix => $row) {
                         $result[] =  (new ReviewsModel($filial['api']))->set($row, $filial['filial'], $prefix);

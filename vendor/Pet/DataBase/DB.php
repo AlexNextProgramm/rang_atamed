@@ -25,13 +25,14 @@ class DB{
     }
 
 
-    function reload_cache_modification_time(){
+    function reload_cache_modification_time() {
+        if ($this->CACHE_DB == 1) {
 
-       $time =  $this->update_time();
-   
-       if(Cache::factory()->time_section_exits($this->table, $time)){
-            Cache::factory()->clear_cache_section($this->table);
-                           
+            $time =  $this->update_time();
+
+            if (Cache::factory()->time_section_exits($this->table, $time)) {
+                Cache::factory()->clear_cache_section($this->table);
+            }
         }
     }
     
@@ -40,7 +41,7 @@ class DB{
     {
         $nameCache = $this->table.implode('-', array_merge($column, $join)).$where;
 
-        $data = $this->CACHE_DB == 1?Cache::factory()->get($nameCache, $this->table):false;
+        $data = $this->CACHE_DB == 1 ? Cache::factory()->get($nameCache, $this->table) : false;
 
         if(gettype($data) == 'array') return $data;
         
