@@ -46,9 +46,9 @@ class DB{
         
 
         if(!$this->Mysql) $this->connect();
-     
+           
         $query = "`".$this->escape("` , `", $column, 'select')."`";
-
+       
         $joinStr = '';
 
         if(count($column) == 0)  $query = "*";
@@ -179,12 +179,18 @@ class DB{
         if (!$this->error) {
            
             $sql = $this->Mysql->query($query);
-            $this->Mysql->close();
+            
             return gettype($sql) == 'object'? $sql->fetch_all(MYSQLI_ASSOC): $sql;
             
         } 
             return $this->error;
         
+    }
+    function __destruct()
+    {
+        if($this->Mysql){
+            $this->Mysql->close();
+        }
     }
 
 
@@ -214,7 +220,7 @@ class DB{
                      $tableColumn =  explode('.', $value);
                      $value = "{$tableColumn[0]}`.`{$tableColumn[1]}"; 
                 }
-                       
+                if(!$this->Mysql) $this->connect();
                 $str .= $this->Mysql->real_escape_string($value).$separate;
             }else{
                 $str .= $value . $separate;

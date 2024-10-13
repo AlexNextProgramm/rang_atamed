@@ -132,7 +132,7 @@ class ClientModel extends Model{
     function getReport($api = null, $filial_id = null){
         $data = [];
         if($api) $data['api'] = $api;
-        if(is_numeric($filial_id)) $data['filial'] = (new FilialModel)->name($filial_id);
+        if(is_numeric($filial_id)) $data['filial'] = (new FilialModel())->name($filial_id);
 
         return $this->find($data, ['bonus_check','bonus','id','date-time','name','telefon', 'filial','canal','path', 'like_star', 'text_negative', 'platform_path', 'watch'],[],
     ' ORDER BY `date-time` DESC');
@@ -143,10 +143,9 @@ class ClientModel extends Model{
     function getsearch($api, $filial_id, $text)
     {
         $filial = '';
+       // $text = $this->escapeStr($text);
 
-        $text = $this->escapeStr($text);
-
-        if (is_numeric($filial_id)) $filial = "AND `filial`='".(new FilialModel)->name($filial_id)."'";
+         if (is_numeric($filial_id)) $filial = "AND `filial`='".(new FilialModel())->name($filial_id)."'";
 
         return $this->select(['bonus_check','bonus','id','date-time','name', 'telefon', 'filial', 'canal', 'path', 'like_star', 'text_negative', 'platform_path', 'watch'], 
         "`api`='$api' $filial AND (`telefon`LIKE '%$text%' OR `name` LIKE '%$text%' OR `text_negative` LIKE '%$text%')");

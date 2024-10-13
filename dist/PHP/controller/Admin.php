@@ -93,10 +93,8 @@ class AdminController extends Controller{
 
     public function request(Request $request){
         $search = attr('search');
-       
           if($search && $search != ''){
-            
-              $request->set(['client' => (new ClientModel())->getsearch(attr('api'), cookie('filial'), $search)]);
+                  $request->set(['client' => (new ClientModel())->getsearch(attr('api'), cookie('filial'), $search)]);
           }else{
               $request->set(['client'=>(new ClientModel())->getReport(attr('api'), cookie('filial'))]);
           }

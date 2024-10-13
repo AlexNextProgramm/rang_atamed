@@ -123,7 +123,6 @@ class ApiController extends Controller {
                 $result = null;
                 foreach (explode(' ', $client['name']) as $key => $cName) {
 
-
                     if (
                         str_contains(strtolower($row['name']), strtolower($cName)) ||
                         str_contains(strtolower($row['text']), strtolower($cName))
