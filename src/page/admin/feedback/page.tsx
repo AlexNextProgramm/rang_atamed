@@ -152,7 +152,7 @@ export function ReportClient(data:any){
                 <td><Stars stars={String(row.like_star)}/></td>
                 <td><p>{row.bonus}</p></td>
                 <td>{bonusST}</td>
-                <td style={'min-width: 300px;'}>{watch(data['history'][row.id], row['date-time'])}</td>
+                <td style={'min-width: 300px;'}>{watch(data['history'][row.id], row['date-time'], row['platform'])}</td>
             </tr>)
             
 

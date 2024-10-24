@@ -101,8 +101,6 @@ class ApiController extends Controller {
 
 
     public function match() {
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
         $clients = (new ClientModel())->find(['path' => "POSITIVE"], ['name', 'platform_path', 'date_path', 'url', 'api', "id", "filial"]);
         $count = count($clients);
         $countResult = 0;

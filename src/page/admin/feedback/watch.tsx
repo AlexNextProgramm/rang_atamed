@@ -2,7 +2,7 @@ import { FDate } from "../../../library/DateClass";
 import { integ } from "../../../rocet/core/integration";
 import './../../../CSS/component/watch.scss'
 
-export function watch(history: Array<{ [name: string]: string }> | undefined , date_time:string): JSX.Element {
+export function watch(history: Array<{ [name: string]: string }> | undefined , date_time:string, platform:string): JSX.Element {
     let JSX:Array<JSX.Element> = []
 
     
@@ -35,9 +35,12 @@ export function watch(history: Array<{ [name: string]: string }> | undefined , d
 
             if (status == "POSITIVE") {
                 JSX.push(<span />)
-                JSX.push(<div className="icon icon-pl" data={"Перешел на платформу " + string + " " + new FDate(date)['DD.MM.YYYY']() + " Время: " + time}><img src={require('./../../../images/search-' + string + '.png')} /></div>)
+                
+                JSX.push(<div className="icon icon-pl" data={"Перешел на платформу " + string + " " + new FDate(date)['DD.MM.YYYY']() + " Время: " + time}>
+                   <img src={require('./../../../images/search-' + string + '.png')} />
+                </div>)
             }
-            if (status == "NEGATIVE" || status == "FAMILY") {
+            if ((status == "NEGATIVE" || status == "FAMILY") && divmes.textContent != '' ) {
                 JSX.push(<span/>)
                 JSX.push(<div className="icon icon-pl" data={"Оставил  сообщение"} onclick={()=>showmess(divmes)}><img src={require('./../../../images/mess-text.png')} /></div>)
             }

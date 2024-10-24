@@ -23,7 +23,7 @@ function clickstar(evt) {
 
 button.onclick = function () {
     if (s == 0) {
-        alert("Поставте оценку нажав на звезду");
+        alert("Установите оценку нажав на звезду");
     } else {
         POST(window.location.href, {
             star: Number(s),

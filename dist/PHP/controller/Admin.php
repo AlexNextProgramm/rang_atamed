@@ -94,6 +94,7 @@ class AdminController extends Controller{
 
     public function request(Request $request)
     {
+        // $this->reloadHistory();
         $search = attr('search');
         if ($search && $search != '') {
             $request->set(['client' => (new ClientModel())->getsearch(attr('api'), cookie('filial'), $search)]);
@@ -108,7 +109,6 @@ class AdminController extends Controller{
 
         Inertia::render('admin/request', $request);
     }
-
 
     public function setBonus()
     {
